@@ -21,7 +21,7 @@
 	<div class="col-md-3">
 		<h2>Marker Data</h2><hr/>
 		<div class="form-horizontal">
-			<a class="btn btn-success" href="#/create"><span class="glyphicon glyphicon-plus"></span>New Marker</a>
+			<a class="btn btn-success" href="#/create"><span class="glyphicon glyphicon-plus"></span>Create a new Marker</a>
 		</div>
 	</div>
 	<div class="col-md-9">

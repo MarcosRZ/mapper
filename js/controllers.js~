@@ -30,6 +30,7 @@ mApp.controller('newMarkerController', ['$scope', '$routeParams', function($scop
 	// Applied function to refresh Lat and Lon inputs on JS event
 	$scope.refreshMarkerPosition = function (lat, lng) {
 		$scope.$apply( function(){
+			console.log($scope.marker)
 			$scope.lat = $scope.marker.position.lat();
 			$scope.lng = $scope.marker.position.lng();
 		});
