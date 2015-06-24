@@ -1,0 +1,6 @@
+# Bower components
+bower_components
+
+# lockfiles
+*.swp
+*.~
