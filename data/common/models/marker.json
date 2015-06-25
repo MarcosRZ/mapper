@@ -1,0 +1,23 @@
+{
+  "name": "marker",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "lat": {
+      "type": "number",
+      "required": true
+    },
+    "lng": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

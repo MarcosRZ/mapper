@@ -2,8 +2,9 @@ var mAppServices = angular.module('mAppServices', ['ngResource']);
 
 mAppServices.factory('MarkerService', ['$resource',
 	function($resource){
-		return $resource('maps/:cat.json', {}, {
-		query: {method:'GET', params:{cat:'myMarkers'}, isArray:true}
+		return $resource('http://localhost:3000/api/markers', {}, {
+		query: {method:'GET', params:{cat:'myMarkers'}, isArray:true},
+		save: {method:'POST'}
 	});
 }]);
 

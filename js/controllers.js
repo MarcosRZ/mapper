@@ -1,6 +1,6 @@
 var mAppControllers = angular.module('mAppControllers', [])
 
-mApp.controller('newMarkerController', ['$scope', '$routeParams', function($scope, $routeParams) {
+mApp.controller('newMarkerController', ['$scope', '$routeParams', 'MarkerService', function($scope, $routeParams, MarkerService) {
 
 	// Create map with some presets
 	function initialize() {
@@ -35,6 +35,12 @@ mApp.controller('newMarkerController', ['$scope', '$routeParams', function($scop
 		});
 	}
 	
+	$scope.saveMarker = function(){
+
+		var myMarker = { name: $scope.name, lat: $scope.lat, lng: $scope.lng }
+		MarkerService.save({},myMarker,function(){console.log("Save Ok!")}, function(){console.err("Save Failed!")});
+	}
+
 	// Set Lat and Lon inputs at boot
 	$scope.lat = $scope.marker.position.lat();
 	$scope.lng = $scope.marker.position.lng();
