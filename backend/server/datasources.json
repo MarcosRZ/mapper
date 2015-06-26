@@ -1,0 +1,6 @@
+{
+  "mongo-ds": {
+    "name": "mongo-ds",
+    "connector": "mongodb"
+  }
+}

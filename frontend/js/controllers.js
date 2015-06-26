@@ -49,12 +49,23 @@ mApp.controller('newMarkerController', ['$scope', '$routeParams', 'MarkerService
 
 mApp.controller('allMarkersController', ['$scope', '$routeParams', 'MarkerService', function($scope, $routeParams, MarkerService){
 
+	function pinSymbol(color) {
+		return {
+		    path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+		    fillColor: color,
+		    fillOpacity: 1,
+		    strokeColor: '#000',
+		    strokeWeight: 2,
+		    scale: 1,
+	   };
+	}
+
 	// Create map with some presets
 	function initialize() {
 	  	$scope.map = new google.maps.Map(document.getElementById('map-canvas'), {
 			zoom: 3,
 			center: {lat: -34.397, lng: 150.644}
-	  	}
+	  	});
 	}
 	
 	initialize();
@@ -69,16 +80,19 @@ mApp.controller('allMarkersController', ['$scope', '$routeParams', 'MarkerServic
 				position: new google.maps.LatLng(marker.lat, marker.lng),
 				map: $scope.map,
 				draggable: false,
-				title: marker.name
+				title: marker.name,
+				icon: pinSymbol('#660066')
 			})
 
+			//nextMarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+			//nextMarker.setIcon('http://orig06.deviantart.net/74f1/f/2010/101/9/c/defcon_256_png_icon_by_kingreverant.png')
 			bounds.extend(nextMarker.getPosition());
 		})
 
 		$scope.map.fitBounds(bounds);
 	}
 
+	
 	$scope.markers = MarkerService.query(putMarkersInMap);
-
 
 }]);
