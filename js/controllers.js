@@ -52,22 +52,30 @@ mApp.controller('allMarkersController', ['$scope', '$routeParams', 'MarkerServic
 	// Create map with some presets
 	function initialize() {
 	  	$scope.map = new google.maps.Map(document.getElementById('map-canvas'), {
-		zoom: 3,
-		center: {lat: -34.397, lng: 150.644}
-	  });
+			zoom: 3,
+			center: {lat: -34.397, lng: 150.644}
+	  	}
 	}
 	
 	initialize();
-
+	
+	// Puts all markers in the map, and fits map bounds to all of them.
 	var putMarkersInMap = function(){
+
+		var bounds = new google.maps.LatLngBounds();
+
 		$scope.markers.forEach(function(marker){
-			new google.maps.Marker({
+			var nextMarker = new google.maps.Marker({
 				position: new google.maps.LatLng(marker.lat, marker.lng),
 				map: $scope.map,
 				draggable: false,
 				title: marker.name
 			})
+
+			bounds.extend(nextMarker.getPosition());
 		})
+
+		$scope.map.fitBounds(bounds);
 	}
 
 	$scope.markers = MarkerService.query(putMarkersInMap);
