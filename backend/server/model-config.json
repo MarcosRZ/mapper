@@ -29,5 +29,9 @@
   "marker": {
     "dataSource": "mongo-ds",
     "public": true
+  },
+  "category": {
+    "dataSource": "mongo-ds",
+    "public": true
   }
 }

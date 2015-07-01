@@ -1,26 +1,21 @@
 {
-  "name": "marker",
+  "name": "category",
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
-    "lat": {
-      "type": "number",
-      "required": true
-    },
-    "lng": {
-      "type": "number",
-      "required": true
-    },
     "name": {
       "type": "string",
       "required": true
+    },
+    "description": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "category": {
-      "type": "belongsTo",
-      "model": "category",
+    "markers": {
+      "type": "hasMany",
+      "model": "marker",
       "foreignKey": ""
     }
   },

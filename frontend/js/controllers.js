@@ -3,14 +3,15 @@ var mAppControllers = angular.module('mAppControllers', [])
 mApp.controller('newMarkerController', ['$scope', '$routeParams', 'MarkerService', function($scope, $routeParams, MarkerService) {
 
 	// Create map with some presets
-	function initialize() {
+	$scope.i = function() {
+		console.log("Initializing new marker controller")
 	  	$scope.map = new google.maps.Map(document.getElementById('map-canvas'), {
 		zoom: 3,
 		center: {lat: -34.397, lng: 150.644}
 	  });
 	}
 
-	initialize();
+	$scope.i();
 
 	// Create marker
 	$scope.marker = new google.maps.Marker({
@@ -47,7 +48,7 @@ mApp.controller('newMarkerController', ['$scope', '$routeParams', 'MarkerService
 	
 }]);
 
-mApp.controller('allMarkersController', ['$scope', '$routeParams', 'MarkerService', function($scope, $routeParams, MarkerService){
+mApp.controller('CategoriesController', ['$scope', '$routeParams', 'CategoriesService','MarkerService', function($scope, $routeParams, CategoriesService, MarkerService){
 
 	function pinSymbol(color) {
 		return {
@@ -61,15 +62,14 @@ mApp.controller('allMarkersController', ['$scope', '$routeParams', 'MarkerServic
 	}
 
 	// Create map with some presets
-	function initialize() {
+	$scope.i = function() {
+		console.log("initialize")
 	  	$scope.map = new google.maps.Map(document.getElementById('map-canvas'), {
 			zoom: 3,
 			center: {lat: -34.397, lng: 150.644}
 	  	});
 	}
-	
-	initialize();
-	
+        $scope.i();	
 	// Puts all markers in the map, and fits map bounds to all of them.
 	var putMarkersInMap = function(){
 
@@ -91,8 +91,24 @@ mApp.controller('allMarkersController', ['$scope', '$routeParams', 'MarkerServic
 
 		$scope.map.fitBounds(bounds);
 	}
-
 	
-	$scope.markers = MarkerService.query(putMarkersInMap);
+	$scope.loadCategories = function(callback){
+		$scope.categories = CategoriesService.query({}, callback);
+	}
+
+        $scope.loadMarkersForFirstCategory = function(callback){
+                console.log("Getting markers for category["+$scope.categories[0].id+"]")
+                $scope.markers = MarkerService.query({id:$scope.categories[0].id}, callback);
+        }
+
+	$scope.loadMarkersForCategory = function(id, callback){
+		console.log("Getting markers for category["+id+"]")
+		$scope.markers = MarkerService.query({id:$scope.currentCategory.id}, callback);
+	}
+
+        $scope.loadCategories($scope.loadMarkersForFirstCategory(putMarkersInMap));
+
+
+//	$scope.markers = MarkerService.query(putMarkersInMap);
 
 }]);

@@ -9,7 +9,7 @@ mApp.config(['$routeProvider',
 		$routeProvider.
 		when('/', {
 			templateUrl: 'partials/all-markers.html',
-			controller: 'allMarkersController'
+			controller: 'CategoriesController'
 		}).
 		when('/create', {
 			templateUrl: 'partials/create.html',
